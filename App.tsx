@@ -25,10 +25,12 @@ import OrbitingTechIcons from './components/OrbitingTechIcons';
 import TechBackground from './components/TechBackground';
 import Floating3DObjects from './components/Floating3DObjects';
 import CustomCursor from './components/CustomCursor';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
 import LoadingScreen from './components/LoadingScreen';
+import LoadingScreen_Tech from './components/LoadingScreen_Tech';
+import LoadingScreen_Elegant from './components/LoadingScreen_Elegant';
+
+// ESCOLHA O ESTILO DE LOADING AQUI: 'GOLDEN' | 'TECH' | 'ELEGANT'
+const LOADING_VARIANT: string = 'GOLDEN';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -107,7 +109,13 @@ const App: React.FC = () => {
     <div className="min-h-screen text-white font-sans selection:bg-[#FCBE26] selection:text-[#000000] relative bg-[#000000] overflow-x-hidden">
       <CustomCursor />
       <AnimatePresence mode="wait">
-        {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
+        {isLoading && (
+          <>
+            {LOADING_VARIANT === 'GOLDEN' && <LoadingScreen onComplete={() => setIsLoading(false)} />}
+            {LOADING_VARIANT === 'TECH' && <LoadingScreen_Tech onComplete={() => setIsLoading(false)} />}
+            {LOADING_VARIANT === 'ELEGANT' && <LoadingScreen_Elegant onComplete={() => setIsLoading(false)} />}
+          </>
+        )}
       </AnimatePresence>
       <Floating3DObjects />
       {/* AMBIENT BACKGROUND BEAMS */}
