@@ -131,66 +131,73 @@ const App: React.FC = () => {
           <TechBackground />
           <motion.div
             style={{ scale: heroScale, opacity: heroOpacity, y: heroY }}
-            className="text-center z-10 max-w-7xl mx-auto"
+            className="grid lg:grid-cols-2 gap-12 items-center z-10 max-w-7xl mx-auto w-full"
           >
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8 backdrop-blur-md"
-            >
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FCBE26] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FCBE26]"></span>
-              </span>
-              <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white">Scale Mode Active</span>
-            </motion.div>
-
-            <TypewriterHero />
-
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-              className="text-slate-400 max-w-2xl mx-auto mb-12 text-xl md:text-2xl font-medium tracking-tight leading-relaxed"
-            >
-              Engenharia de tráfego e lógica de dados para operações que buscam <span className="text-white italic">escala real</span> e previsibilidade absoluta.
-            </motion.p>
-
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-              <CTAButton
-                text="ESCALAR AGORA"
-                onClick={() => document.getElementById('leads')?.scrollIntoView({ behavior: 'smooth' })}
-                className="gsap-reveal"
-              />
-              <button
-                onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
-                className="group flex items-center gap-3 px-8 py-4 text-sm font-black uppercase tracking-[0.2em] text-white/60 hover:text-white transition-all duration-300"
+            <div className="text-left">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 mb-8 backdrop-blur-md"
               >
-                Ver Estratégias
-                <ChevronRight size={18} className="group-hover:translate-x-2 transition-transform" />
-              </button>
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FCBE26] opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FCBE26]"></span>
+                </span>
+                <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white">Scale Mode Active</span>
+              </motion.div>
+
+              <TypewriterHero />
+
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+                className="text-slate-400 max-w-2xl mb-12 text-xl md:text-2xl font-medium tracking-tight leading-relaxed"
+              >
+                Engenharia de tráfego e lógica de dados para operações que buscam <span className="text-white italic">escala real</span> e previsibilidade absoluta.
+              </motion.p>
+
+              <div className="flex flex-col sm:flex-row gap-6 justify-start items-center">
+                <CTAButton
+                  text="QUERO ESCALAR MEU NEGÓCIO"
+                  onClick={() => document.getElementById('leads')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="gsap-reveal"
+                />
+                <button
+                  onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="group flex items-center gap-3 px-8 py-4 text-sm font-black uppercase tracking-[0.2em] text-white/60 hover:text-white transition-all duration-300"
+                >
+                  Ver Estratégias
+                  <ChevronRight size={18} className="group-hover:translate-x-2 transition-transform" />
+                </button>
+              </div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1 }}
+                className="mt-24 flex flex-col sm:flex-row items-center justify-start gap-12 text-slate-500 border-t border-white/5 pt-12"
+              >
+                <div className="flex flex-col gap-1">
+                  <span className="text-[10px] uppercase font-black tracking-widest">Growth Engine</span>
+                  <div className="flex gap-6 items-center opacity-60">
+                    <img src="/assets/google.png" alt="Google" className="h-4 w-auto object-contain" />
+                    <img src="/assets/meta.png" alt="Meta" className="h-4 w-auto object-contain" />
+                    <img src="/assets/analytics.png" alt="GA4" className="h-4 w-auto object-contain" />
+                  </div>
+                </div>
+                <div className="w-px h-8 bg-white/10 hidden sm:block" />
+                <div className="flex flex-col gap-1">
+                  <span className="text-[10px] uppercase font-black tracking-widest">Automation Logic</span>
+                  <img src="/assets/n8n.png" alt="n8n" className="h-4 w-auto object-contain" />
+                </div>
+              </motion.div>
             </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1 }}
-              className="mt-24 flex flex-col sm:flex-row items-center justify-center gap-12 text-slate-500 border-t border-white/5 pt-12"
-            >
-              <div className="flex flex-col gap-1">
-                <span className="text-[10px] uppercase font-black tracking-widest">Growth Engine</span>
-                <div className="flex gap-6 items-center opacity-60">
-                  <img src="/assets/google.png" alt="Google" className="h-4 w-auto object-contain" />
-                  <img src="/assets/meta.png" alt="Meta" className="h-4 w-auto object-contain" />
-                  <img src="/assets/analytics.png" alt="GA4" className="h-4 w-auto object-contain" />
-                </div>
-              </div>
-              <div className="w-px h-8 bg-white/10 hidden sm:block" />
-              <div className="flex flex-col gap-1">
-                <span className="text-[10px] uppercase font-black tracking-widest">Automation Logic</span>
-                <img src="/assets/n8n.png" alt="n8n" className="h-4 w-auto object-contain" />
-              </div>
-            </motion.div>
+            <div className="hidden lg:block relative h-[600px] flex items-center justify-center">
+              <div className="absolute inset-0 bg-radial-gradient from-[#FCBE26]/5 to-transparent blur-3xl opacity-20" />
+              <OrbitingTechIcons />
+            </div>
           </motion.div>
 
           {/* Scroll Indicator */}
