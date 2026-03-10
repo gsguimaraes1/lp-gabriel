@@ -92,6 +92,29 @@ const App: React.FC = () => {
         });
       });
     });
+    // Horizontal Scroll Effect for Sticky Reveal Cards
+    const cards = document.querySelectorAll('.sticky-reveal-card');
+    cards.forEach((card, index) => {
+      if (index > 0) {
+        gsap.fromTo(card,
+          {
+            y: "100%",
+            borderRadius: "100px 100px 0 0",
+          },
+          {
+            y: "0%",
+            borderRadius: "0px 0px 0 0",
+            ease: "none",
+            scrollTrigger: {
+              trigger: card,
+              start: "top bottom",
+              end: "top top",
+              scrub: true,
+            }
+          }
+        );
+      }
+    });
   }, []);
 
   React.useEffect(() => {
@@ -194,31 +217,31 @@ const App: React.FC = () => {
           </motion.div>
         </section>
 
-        {/* PERFORMANCE TICKER - MARQUEE EFFECT */}
-        <div className="relative z-30 bg-[#FCBE26] py-4 overflow-hidden border-y border-black shadow-[0_0_30px_rgba(252,190,38,0.3)]">
-          <motion.div
-            animate={{ x: [0, -1000] }}
-            transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
-            className="flex whitespace-nowrap gap-12 items-center"
-          >
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="flex gap-12 items-center text-[#050505] font-black uppercase text-sm italic tracking-[0.2em]">
-                <span>• ROAS MÉDIO: 8.4x</span>
-                <span>• +R$ 15M INVESTIDOS</span>
-                <span>• CPA OTIMIZADO</span>
-                <span>• SCALE MODE: ON</span>
-                <span>• DATA-DRIVEN STRATEGY</span>
-                <span>• ARKAD PERFORMANCE</span>
-              </div>
-            ))}
-          </motion.div>
-        </div>
+        {/* CONTAINER PARA O EFEITO DE CARTÕES SOBREPOSTOS (STICKY REVEAL) */}
+        <div id="sticky-reveal-container" className="relative z-20">
 
-        {/* SEÇÃO DE TRANSIÇÃO (ESTA SEÇÃO SOBREPÕE O HERO) */}
-        <div className="relative z-20 shadow-[0_-50px_100px_rgba(0,0,0,0.5)]">
+          {/* MARQUEE COMO TRANSIÇÃO */}
+          <div className="sticky top-0 z-[5] bg-[#FCBE26] py-3 overflow-hidden border-y border-black shadow-[0_0_30px_rgba(252,190,38,0.3)]">
+            <motion.div
+              animate={{ x: [0, -1000] }}
+              transition={{ duration: 24, repeat: Infinity, ease: "linear" }}
+              className="flex whitespace-nowrap gap-12 items-center"
+            >
+              {[...Array(6)].map((_, i) => (
+                <div key={i} className="flex gap-12 items-center text-[#050505] font-black uppercase text-xs italic tracking-[0.2em]">
+                  <span>• ROAS MÉDIO: 8.4x</span>
+                  <span>• +R$ 15M INVESTIDOS</span>
+                  <span>• CPA OTIMIZADO</span>
+                  <span>• SCALE MODE: ON</span>
+                  <span>• DATA-DRIVEN STRATEGY</span>
+                  <span>• ARKAD PERFORMANCE</span>
+                </div>
+              ))}
+            </motion.div>
+          </div>
 
-          {/* SEÇÃO 2.5: TECH STACK & EXPERTISE */}
-          <section className="py-32 px-4 md:px-8 border-t border-white/5 relative z-20 bg-[#0A0A0A]">
+          {/* CARD 1: TECH STACK (STICKY) */}
+          <section className="sticky-reveal-card sticky top-0 min-h-screen py-32 px-4 md:px-8 border-t border-white/5 relative z-20 bg-[#0A0A0A] flex flex-col justify-center">
             <div className="max-w-7xl mx-auto text-center gsap-reveal">
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
@@ -255,8 +278,8 @@ const App: React.FC = () => {
             </div>
           </section>
 
-          {/* SEÇÃO 3: O FILTRO - PREMIUM WHITE */}
-          <section className="py-32 px-4 md:px-8 bg-white relative overflow-hidden">
+          {/* CARD 2: O FILTRO (STICKY) */}
+          <section className="sticky-reveal-card sticky top-0 min-h-screen py-32 px-4 md:px-8 bg-white relative overflow-hidden flex flex-col justify-center">
             {/* Section Edge Smoothing */}
             <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-[#0A0A0A] to-transparent z-10" />
 
@@ -355,8 +378,8 @@ const App: React.FC = () => {
             </div>
           </section>
 
-          {/* SEÇÃO 4: SERVIÇOS - ARKAD DEEP PURPLE */}
-          <section id="services" className="py-40 px-4 md:px-8 bg-[#000000] relative overflow-hidden scroll-mt-24">
+          {/* CARD 3: SERVIÇOS (STICKY) */}
+          <section id="services" className="sticky-reveal-card sticky top-0 min-h-screen py-40 px-4 md:px-8 bg-[#000000] relative overflow-hidden scroll-mt-24 flex flex-col justify-center">
             <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_0%,rgba(252,190,38,0.05),transparent_70%)]" />
 
             <div className="max-w-7xl mx-auto text-center mb-32 relative z-10">
@@ -381,186 +404,188 @@ const App: React.FC = () => {
             </div>
           </section>
 
-          {/* SEÇÃO 5: METODOLOGIA - TECH FLOW DESIGN */}
-          <section className="py-40 px-4 md:px-8 bg-[#000000] relative overflow-hidden border-y border-white/5">
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#FCBE26]/5 blur-[200px] rounded-full pointer-events-none" />
+          {/* SEÇÃO 5: METODOLOGIA E RESTANTE (FLUXO NORMAL) */}
+          <div className="relative z-[60] bg-black">
+            <section className="py-40 px-4 md:px-8 bg-[#000000] relative overflow-hidden border-y border-white/5">
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#FCBE26]/5 blur-[200px] rounded-full pointer-events-none" />
 
-            <div className="max-w-7xl mx-auto relative z-10">
-              <div className="text-center mb-32">
-                <motion.h2
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  className="text-5xl md:text-7xl font-black tracking-tighter uppercase italic text-white"
-                >
-                  O Método de <span className="text-[#FCBE26]">Escala</span>
-                </motion.h2>
-                <div className="w-32 h-1.5 bg-gradient-to-r from-transparent via-[#FCBE26] to-transparent mx-auto mt-10 rounded-full" />
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
-                {/* Connecting Line */}
-                <div className="hidden lg:block absolute top-[100px] left-0 w-full h-px bg-gradient-to-r from-transparent via-[#FCBE26]/20 to-transparent z-0" />
-
-                {[
-                  { step: "01", title: "Diagnóstico", desc: "Varredura 360º para identificar gargalos e vazamentos de verba.", icon: <Search size={28} /> },
-                  { step: "02", title: "Rastreamento", desc: "Implementação de infraestrutura de dados de alta performance.", icon: <Zap size={28} /> },
-                  { step: "03", title: "Tráfego", desc: "Campanhas de precisão cirúrgica focadas em escala lucrativa.", icon: <TrendingUp size={28} /> },
-                  { step: "04", title: "Otimização", desc: "Ajustes baseados em IA e BI para maximizar cada centavo gasto.", icon: <BarChart3 size={28} /> }
-                ].map((m, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+              <div className="max-w-7xl mx-auto relative z-10">
+                <div className="text-center mb-32">
+                  <motion.h2
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: true }}
-                    transition={{ delay: idx * 0.15, duration: 0.6 }}
-                    className="relative p-12 glass-panel rounded-[40px] group hover:bg-white/[0.05] hover:border-[#FCBE26]/30 transition-all duration-700 z-10 shadow-2xl overflow-hidden text-left"
+                    className="text-5xl md:text-7xl font-black tracking-tighter uppercase italic text-white"
                   >
-                    <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#FCBE26]/10 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-                    <div className="w-20 h-20 rounded-3xl bg-black border border-white/10 flex items-center justify-center text-[#FCBE26] mb-10 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(252,190,38,0.3)] transition-all duration-700 relative z-10">
-                      {m.icon}
-                    </div>
+                    O Método de <span className="text-[#FCBE26]">Escala</span>
+                  </motion.h2>
+                  <div className="w-32 h-1.5 bg-gradient-to-r from-transparent via-[#FCBE26] to-transparent mx-auto mt-10 rounded-full" />
+                </div>
 
-                    <div className="relative z-10">
-                      <div className="flex items-center gap-4 mb-6">
-                        <span className="text-sm font-black text-[#FCBE26] tracking-widest uppercase opacity-40 group-hover:opacity-100 transition-opacity">{m.step}</span>
-                        <div className="h-px flex-1 bg-white/10 group-hover:bg-[#FCBE26]/30 transition-colors" />
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 relative">
+                  {/* Connecting Line */}
+                  <div className="hidden lg:block absolute top-[100px] left-0 w-full h-px bg-gradient-to-r from-transparent via-[#FCBE26]/20 to-transparent z-0" />
+
+                  {[
+                    { step: "01", title: "Diagnóstico", desc: "Varredura 360º para identificar gargalos e vazamentos de verba.", icon: <Search size={28} /> },
+                    { step: "02", title: "Rastreamento", desc: "Implementação de infraestrutura de dados de alta performance.", icon: <Zap size={28} /> },
+                    { step: "03", title: "Tráfego", desc: "Campanhas de precisão cirúrgica focadas em escala lucrativa.", icon: <TrendingUp size={28} /> },
+                    { step: "04", title: "Otimização", desc: "Ajustes baseados em IA e BI para maximizar cada centavo gasto.", icon: <BarChart3 size={28} /> }
+                  ].map((m, idx) => (
+                    <motion.div
+                      key={idx}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: idx * 0.15, duration: 0.6 }}
+                      className="relative p-12 glass-panel rounded-[40px] group hover:bg-white/[0.05] hover:border-[#FCBE26]/30 transition-all duration-700 z-10 shadow-2xl overflow-hidden text-left"
+                    >
+                      <div className="absolute -top-10 -right-10 w-40 h-40 bg-[#FCBE26]/10 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                      <div className="w-20 h-20 rounded-3xl bg-black border border-white/10 flex items-center justify-center text-[#FCBE26] mb-10 group-hover:scale-110 group-hover:shadow-[0_0_30px_rgba(252,190,38,0.3)] transition-all duration-700 relative z-10">
+                        {m.icon}
                       </div>
-                      <h4 className="text-3xl font-bold text-white mb-6 group-hover:text-[#FCBE26] transition-colors duration-300 tracking-tight leading-tight uppercase italic">{m.title}</h4>
-                      <p className="text-slate-400 text-lg leading-relaxed group-hover:text-slate-200 transition-colors duration-300">{m.desc}</p>
-                    </div>
-                  </motion.div>
-                ))}
+
+                      <div className="relative z-10">
+                        <div className="flex items-center gap-4 mb-6">
+                          <span className="text-sm font-black text-[#FCBE26] tracking-widest uppercase opacity-40 group-hover:opacity-100 transition-opacity">{m.step}</span>
+                          <div className="h-px flex-1 bg-white/10 group-hover:bg-[#FCBE26]/30 transition-colors" />
+                        </div>
+                        <h4 className="text-3xl font-bold text-white mb-6 group-hover:text-[#FCBE26] transition-colors duration-300 tracking-tight leading-tight uppercase italic">{m.title}</h4>
+                        <p className="text-slate-400 text-lg leading-relaxed group-hover:text-slate-200 transition-colors duration-300">{m.desc}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
-            </div>
-          </section>
+            </section>
 
-          {/* SEÇÃO 6: SOBRE - VOLTA PARA O ROXO PROFUNDO */}
-          <section id="about" className="py-40 px-4 md:px-8 bg-[#000000] relative overflow-hidden scroll-mt-24">
-            <div className="absolute bottom-0 right-0 w-[800px] h-[800px] bg-[#FCBE26]/5 blur-[200px] -z-0 rounded-full" />
+            {/* SEÇÃO 6: SOBRE - VOLTA PARA O ROXO PROFUNDO */}
+            <section id="about" className="py-40 px-4 md:px-8 bg-[#000000] relative overflow-hidden scroll-mt-24">
+              <div className="absolute bottom-0 right-0 w-[800px] h-[800px] bg-[#FCBE26]/5 blur-[200px] -z-0 rounded-full" />
 
-            <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-24 relative z-10">
-              <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="lg:w-2/5"
-              >
-                <div className="relative group">
-                  <div className="absolute -inset-4 bg-gradient-to-r from-[#FCBE26] to-[#FFA000] rounded-[40px] blur-2xl opacity-20 group-hover:opacity-30 transition-opacity duration-700" />
-                  <div className="w-full aspect-[4/5] bg-slate-800 rounded-[35px] overflow-hidden border border-white/10 relative shadow-2xl group">
-                    <img
-                      src="/assets/Gabriel-Guimaraes.png"
-                      alt="Gabriel Guimarães"
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      data-cursor-text="GABRIEL"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-80" />
-                    <div className="absolute inset-0 flex flex-col items-center justify-end p-12 text-center">
-                      <h4 className="text-2xl font-black uppercase tracking-tighter italic">Gabriel Guimarães</h4>
-                      <p className="text-sm font-black text-[#FCBE26] tracking-[0.3em] uppercase mt-2">Fundador & Estrategista</p>
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="lg:w-3/5"
-              >
-                <h2 className="text-5xl md:text-6xl font-black mb-10 tracking-tighter uppercase italic leading-tight">
-                  Mais que um gestor, <br />
-                  <span className="text-[#FCBE26]">um parceiro estratégico.</span>
-                </h2>
-                <div className="space-y-8 text-slate-300 text-xl md:text-2xl leading-relaxed font-medium">
-                  <p>
-                    Minha missão é simples: usar <span className="text-white">dados e automação</span> para garantir que empresas sólidas continuem crescendo com previsibilidade.
-                  </p>
-                  <p>
-                    Em um mercado saturado de amadorismo, eu entrego <span className="text-[#FCBE26]">ciência de marketing</span>. Focamos em CAC, LTV e ROAS real, fugindo das métricas de vaidade.
-                  </p>
-                  <blockquote className="border-l-8 border-[#FCBE26] pl-10 italic text-slate-400 py-6 text-2xl md:text-3xl font-bold bg-white/5 rounded-r-3xl pr-8">
-                    "O tráfego pago é a engrenagem de faturamento que precisa ser lubrificada com dados."
-                  </blockquote>
-                </div>
-
-                <div className="mt-16 grid grid-cols-2 gap-12">
-                  <div className="text-left">
-                    <p className="text-5xl font-black text-[#FCBE26] tracking-tighter italic">100%</p>
-                    <p className="text-xs text-slate-500 uppercase font-black tracking-[0.3em] mt-2">Foco em Performance</p>
-                  </div>
-                  <div className="text-left">
-                    <p className="text-5xl font-black text-[#FCBE26] tracking-tighter italic">B2B</p>
-                    <p className="text-xs text-slate-500 uppercase font-black tracking-[0.3em] mt-2">Especialista Real</p>
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </section>
-
-          {/* SEÇÃO DE PARCEIROS (DISCRETA) */}
-          <div className="py-16 bg-[#000000] border-t border-white/5 flex flex-col items-center">
-            <p className="text-slate-600 text-[9px] uppercase font-black tracking-[0.5em] mb-10 opacity-40">Marcas que aceleram conosco</p>
-            <div className="flex flex-wrap justify-center items-center gap-16 md:gap-24 opacity-30 hover:opacity-80 transition-all duration-700">
-              <img src="/assets/logo branco_krenke.png" alt="Krenke" className="h-7 w-auto object-contain" />
-              <img src="/assets/logo-kinderplay.png" alt="Kinderplay" className="h-9 w-auto object-contain brightness-0 invert" />
-            </div>
-          </div>
-
-          <LeadFormSection />
-
-          {/* FOOTER */}
-          <footer className="py-32 px-4 md:px-8 bg-[#050505] border-t border-white/5 text-center relative overflow-hidden">
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-[#FCBE26]/20 to-transparent" />
-
-            <div className="max-w-7xl mx-auto flex flex-col items-center gap-16 relative z-10">
-              <motion.img
-                whileHover={{ scale: 1.1, rotate: [0, -2, 2, 0] }}
-                src="/assets/logo-arkad.png"
-                alt="Arkad"
-                className="h-20 w-auto object-contain opacity-80"
-              />
-
-              <div className="flex flex-wrap justify-center gap-12 text-sm font-black uppercase tracking-[0.3em]">
-                {[
-                  { label: 'Home', id: 'hero' },
-                  { label: 'Serviços', id: 'services' },
-                  { label: 'Cases', id: 'leads' },
-                  { label: 'Sobre', id: 'about' }
-                ].map((link) => (
-                  <button
-                    key={link.id}
-                    onClick={() => document.getElementById(link.id)?.scrollIntoView({ behavior: 'smooth' })}
-                    className="text-slate-500 hover:text-[#FCBE26] transition-colors"
-                  >
-                    {link.label}
-                  </button>
-                ))}
-              </div>
-
-              <div className="flex flex-col gap-8 w-full max-w-2xl">
-                <a
-                  href="#"
-                  className="group flex flex-col items-center gap-4 p-8 rounded-[40px] bg-white/5 border border-white/5 hover:border-[#FCBE26]/30 transition-all duration-700"
+              <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-24 relative z-10">
+                <motion.div
+                  initial={{ opacity: 0, x: -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  className="lg:w-2/5"
                 >
-                  <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-[#FCBE26] shadow-[0_0_30px_rgba(252,190,38,0.4)] group-hover:scale-110 transition-transform duration-700">
-                    <img src="/assets/Gabriel-Guimaraes.png" alt="Gabriel" className="w-full h-full object-cover" />
+                  <div className="relative group">
+                    <div className="absolute -inset-4 bg-gradient-to-r from-[#FCBE26] to-[#FFA000] rounded-[40px] blur-2xl opacity-20 group-hover:opacity-30 transition-opacity duration-700" />
+                    <div className="w-full aspect-[4/5] bg-slate-800 rounded-[35px] overflow-hidden border border-white/10 relative shadow-2xl group">
+                      <img
+                        src="/assets/Gabriel-Guimaraes.png"
+                        alt="Gabriel Guimarães"
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        data-cursor-text="GABRIEL"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-80" />
+                      <div className="absolute inset-0 flex flex-col items-center justify-end p-12 text-center">
+                        <h4 className="text-2xl font-black uppercase tracking-tighter italic">Gabriel Guimarães</h4>
+                        <p className="text-sm font-black text-[#FCBE26] tracking-[0.3em] uppercase mt-2">Fundador & Estrategista</p>
+                      </div>
+                    </div>
                   </div>
-                  <span className="text-2xl font-black uppercase tracking-tighter italic">Falar com o Gabriel</span>
-                  <span className="text-[#FCBE26] text-sm font-black uppercase tracking-[0.2em] opacity-60 group-hover:opacity-100 transition-opacity underline decoration-2 underline-offset-8">Consultoria Gratuita via WhatsApp</span>
-                </a>
+                </motion.div>
 
-                <div className="flex flex-col gap-4 mt-8">
-                  <p className="text-slate-600 text-[10px] uppercase font-black tracking-[0.4em] leading-loose">
-                    &copy; {new Date().getFullYear()} Arkad Mídias & Performance Tech.<br />
-                    Estratégia, Dados e Escala Lucrativa.
-                  </p>
-                </div>
+                <motion.div
+                  initial={{ opacity: 0, x: 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  className="lg:w-3/5"
+                >
+                  <h2 className="text-5xl md:text-6xl font-black mb-10 tracking-tighter uppercase italic leading-tight">
+                    Mais que um gestor, <br />
+                    <span className="text-[#FCBE26]">um parceiro estratégico.</span>
+                  </h2>
+                  <div className="space-y-8 text-slate-300 text-xl md:text-2xl leading-relaxed font-medium">
+                    <p>
+                      Minha missão é simples: usar <span className="text-white">dados e automação</span> para garantir que empresas sólidas continuem crescendo com previsibilidade.
+                    </p>
+                    <p>
+                      Em um mercado saturado de amadorismo, eu entrego <span className="text-[#FCBE26]">ciência de marketing</span>. Focamos em CAC, LTV e ROAS real, fugindo das métricas de vaidade.
+                    </p>
+                    <blockquote className="border-l-8 border-[#FCBE26] pl-10 italic text-slate-400 py-6 text-2xl md:text-3xl font-bold bg-white/5 rounded-r-3xl pr-8">
+                      "O tráfego pago é a engrenagem de faturamento que precisa ser lubrificada com dados."
+                    </blockquote>
+                  </div>
+
+                  <div className="mt-16 grid grid-cols-2 gap-12">
+                    <div className="text-left">
+                      <p className="text-5xl font-black text-[#FCBE26] tracking-tighter italic">100%</p>
+                      <p className="text-xs text-slate-500 uppercase font-black tracking-[0.3em] mt-2">Foco em Performance</p>
+                    </div>
+                    <div className="text-left">
+                      <p className="text-5xl font-black text-[#FCBE26] tracking-tighter italic">B2B</p>
+                      <p className="text-xs text-slate-500 uppercase font-black tracking-[0.3em] mt-2">Especialista Real</p>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            </section>
+
+            {/* SEÇÃO DE PARCEIROS (DISCRETA) */}
+            <div className="py-16 bg-[#000000] border-t border-white/5 flex flex-col items-center">
+              <p className="text-slate-600 text-[9px] uppercase font-black tracking-[0.5em] mb-10 opacity-40">Marcas que aceleram conosco</p>
+              <div className="flex flex-wrap justify-center items-center gap-16 md:gap-24 opacity-30 hover:opacity-80 transition-all duration-700">
+                <img src="/assets/logo branco_krenke.png" alt="Krenke" className="h-7 w-auto object-contain" />
+                <img src="/assets/logo-kinderplay.png" alt="Kinderplay" className="h-9 w-auto object-contain brightness-0 invert" />
               </div>
             </div>
-          </footer>
+
+            <LeadFormSection />
+
+            {/* FOOTER */}
+            <footer className="py-32 px-4 md:px-8 bg-[#050505] border-t border-white/5 text-center relative overflow-hidden">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-[#FCBE26]/20 to-transparent" />
+
+              <div className="max-w-7xl mx-auto flex flex-col items-center gap-16 relative z-10">
+                <motion.img
+                  whileHover={{ scale: 1.1, rotate: [0, -2, 2, 0] }}
+                  src="/assets/logo-arkad.png"
+                  alt="Arkad"
+                  className="h-20 w-auto object-contain opacity-80"
+                />
+
+                <div className="flex flex-wrap justify-center gap-12 text-sm font-black uppercase tracking-[0.3em]">
+                  {[
+                    { label: 'Home', id: 'hero' },
+                    { label: 'Serviços', id: 'services' },
+                    { label: 'Cases', id: 'leads' },
+                    { label: 'Sobre', id: 'about' }
+                  ].map((link) => (
+                    <button
+                      key={link.id}
+                      onClick={() => document.getElementById(link.id)?.scrollIntoView({ behavior: 'smooth' })}
+                      className="text-slate-500 hover:text-[#FCBE26] transition-colors"
+                    >
+                      {link.label}
+                    </button>
+                  ))}
+                </div>
+
+                <div className="flex flex-col gap-8 w-full max-w-2xl">
+                  <a
+                    href="#"
+                    className="group flex flex-col items-center gap-4 p-8 rounded-[40px] bg-white/5 border border-white/5 hover:border-[#FCBE26]/30 transition-all duration-700"
+                  >
+                    <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-[#FCBE26] shadow-[0_0_30px_rgba(252,190,38,0.4)] group-hover:scale-110 transition-transform duration-700">
+                      <img src="/assets/Gabriel-Guimaraes.png" alt="Gabriel" className="w-full h-full object-cover" />
+                    </div>
+                    <span className="text-2xl font-black uppercase tracking-tighter italic">Falar com o Gabriel</span>
+                    <span className="text-[#FCBE26] text-sm font-black uppercase tracking-[0.2em] opacity-60 group-hover:opacity-100 transition-opacity underline decoration-2 underline-offset-8">Consultoria Gratuita via WhatsApp</span>
+                  </a>
+
+                  <div className="flex flex-col gap-4 mt-8">
+                    <p className="text-slate-600 text-[10px] uppercase font-black tracking-[0.4em] leading-loose">
+                      &copy; {new Date().getFullYear()} Arkad Mídias & Performance Tech.<br />
+                      Estratégia, Dados e Escala Lucrativa.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </footer>
+          </div>
         </div>
       </div>
     </div>

@@ -11,7 +11,7 @@ const LoadingScreen_Tech: React.FC<LoadingScreenProps> = ({ onComplete }) => {
 
     useEffect(() => {
         const startTime = Date.now();
-        const duration = 5000;
+        const duration = 2000;
 
         const updateProgress = () => {
             const now = Date.now();
