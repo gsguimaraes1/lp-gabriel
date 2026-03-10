@@ -1,0 +1,191 @@
+:root {
+    --primary-black: #050505;
+    --secondary-black: #0A001A;
+    --accent-yellow: #FCBE26;
+    --accent-yellow-glow: rgba(252, 190, 38, 0.3);
+    --deep-night: #000000;
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--deep-night);
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(252, 190, 38, 0.2);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-yellow);
+}
+
+/* Base Styles */
+body {
+    background-color: var(--primary-black);
+    color: white;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    cursor: none;
+}
+
+a,
+button,
+[role="button"],
+input,
+textarea,
+select {
+    cursor: none;
+}
+
+/* Glassmorphism */
+.glass-panel {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+}
+
+.glass-panel-heavy {
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid var(--glass-border);
+}
+
+/* Animations */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-20px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.animate-float {
+    animation: float 6s ease-in-out infinite;
+}
+
+/* Glow Effects */
+.glow-yellow {
+    box-shadow: 0 0 20px rgba(252, 190, 38, 0.3), 0 0 40px rgba(252, 190, 38, 0.1);
+}
+
+.text-glow-yellow {
+    text-shadow: 0 0 10px rgba(252, 190, 38, 0.5);
+}
+
+/* Background Patterns */
+.bg-patterns-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.15;
+    background-image:
+        linear-gradient(rgba(252, 190, 38, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(252, 190, 38, 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+    background-position: center center;
+}
+
+.bg-patterns-container::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 0%, var(--deep-night) 85%);
+}
+
+@keyframes shimmer {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.animate-shimmer {
+    animation: shimmer 1s infinite;
+}
+
+/* Ambient Background Beams */
+.ambient-beam {
+    position: fixed;
+    width: 1px;
+    height: 100vh;
+    background: linear-gradient(to bottom, transparent, rgba(252, 190, 38, 0.1), transparent);
+    filter: blur(2px);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.beam-1 {
+    left: 15%;
+    animation: beamMove 10s infinite alternate linear;
+}
+
+.beam-2 {
+    left: 45%;
+    animation: beamMove 15s infinite alternate-reverse linear;
+}
+
+.beam-3 {
+    left: 75%;
+    animation: beamMove 12s infinite alternate linear;
+}
+
+@keyframes beamMove {
+    from {
+        transform: translateX(-5vw) rotate(5deg);
+        opacity: 0.1;
+    }
+
+    to {
+        transform: translateX(5vw) rotate(-5deg);
+        opacity: 0.3;
+    }
+}
+
+.noise {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    opacity: .01;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 2;
+    /* Moved behind interactive elements */
+}
+
+/* Section Dividers */
+.section-skew {
+    clip-path: polygon(0 5%, 100% 0, 100% 95%, 0 100%);
+}
+
+/* GSAP Helper Classes */
+.gsap-reveal {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.magnetic-button {
+    display: inline-block;
+    transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+}
