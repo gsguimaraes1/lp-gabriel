@@ -182,6 +182,48 @@ body {
     clip-path: polygon(0 5%, 100% 0, 100% 95%, 0 100%);
 }
 
+/* Marquee specific styles */
+.marquee-container {
+    overflow: hidden;
+    white-space: nowrap;
+    display: flex;
+    width: 100%;
+}
+
+.marquee-content {
+    display: flex;
+    animation: marquee 30s linear infinite;
+}
+
+.marquee-content:hover {
+    animation-play-state: paused;
+}
+
+.marquee-item {
+    flex-shrink: 0;
+    margin: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0%);
+    }
+
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.text-gradient-yellow {
+    background: linear-gradient(135deg, #FCBE26, #F9A825);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 /* GSAP Helper Classes */
 .gsap-reveal {
     opacity: 0;

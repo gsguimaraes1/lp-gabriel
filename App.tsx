@@ -168,7 +168,7 @@ const App: React.FC = () => {
                   className="group flex items-center gap-3 px-8 py-4 text-sm font-black uppercase tracking-[0.2em] text-white/60 hover:text-white transition-all duration-300"
                 >
                   Ver Estratégias
-                  <ChevronRight size={18} className="group-hover:translate-x-2 transition-transform" />
+                  <ChevronRight size={18} className="group-hover:translate-x-2 transition-transform" aria-hidden="true" />
                 </button>
               </div>
 
@@ -181,15 +181,15 @@ const App: React.FC = () => {
                 <div className="flex flex-col gap-1">
                   <span className="text-[10px] uppercase font-black tracking-widest">Growth Engine</span>
                   <div className="flex gap-6 items-center opacity-60">
-                    <img src="/assets/google.webp" alt="Google" className="h-4 w-auto object-contain" />
-                    <img src="/assets/meta.webp" alt="Meta" className="h-4 w-auto object-contain" />
-                    <img src="/assets/analytics.webp" alt="GA4" className="h-4 w-auto object-contain" />
+                    <img src="/assets/google.webp" alt="Google Ads" className="h-4 w-auto object-contain" />
+                    <img src="/assets/meta.webp" alt="Meta Ads" className="h-4 w-auto object-contain" />
+                    <img src="/assets/analytics.webp" alt="Google Analytics 4" className="h-4 w-auto object-contain" />
                   </div>
                 </div>
                 <div className="w-px h-8 bg-white/10 hidden sm:block" />
                 <div className="flex flex-col gap-1">
                   <span className="text-[10px] uppercase font-black tracking-widest">Automation Logic</span>
-                  <img src="/assets/n8n.webp" alt="n8n" className="h-4 w-auto object-contain" />
+                  <img src="/assets/n8n.webp" alt="n8n Automation" className="h-4 w-auto object-contain" />
                 </div>
               </motion.div>
             </div>
@@ -465,7 +465,8 @@ const App: React.FC = () => {
                   <div className="w-full aspect-[4/5] bg-slate-800 rounded-[35px] overflow-hidden border border-white/10 relative shadow-2xl group">
                     <img
                       src="/assets/Gabriel-Guimaraes.webp"
-                      alt="Gabriel Guimarães"
+                      alt="Gabriel Guimarães - Fundador da Arkad"
+                      loading="lazy"
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       data-cursor-text="GABRIEL"
                     />
@@ -518,8 +519,8 @@ const App: React.FC = () => {
           <div className="py-16 bg-[#000000] border-t border-white/5 flex flex-col items-center">
             <p className="text-slate-600 text-[9px] uppercase font-black tracking-[0.5em] mb-10 opacity-40">Marcas que aceleram conosco</p>
             <div className="flex flex-wrap justify-center items-center gap-16 md:gap-24 opacity-30 hover:opacity-80 transition-all duration-700">
-              <img src="/assets/logo branco_krenke.webp" alt="Krenke" className="h-7 w-auto object-contain" />
-              <img src="/assets/logo-kinderplay.webp" alt="Kinderplay" className="h-9 w-auto object-contain brightness-0 invert" />
+              <img src="/assets/logo branco_krenke.webp" alt="Logo Krenke" loading="lazy" className="h-7 w-auto object-contain" />
+              <img src="/assets/logo-kinderplay.webp" alt="Logo Kinderplay" loading="lazy" className="h-9 w-auto object-contain brightness-0 invert" />
             </div>
           </div>
 
@@ -533,7 +534,8 @@ const App: React.FC = () => {
               <motion.img
                 whileHover={{ scale: 1.1, rotate: [0, -2, 2, 0] }}
                 src="/assets/logo-arkad.webp"
-                alt="Arkad"
+                alt="Arkad Mídias & Performance Tech"
+                loading="lazy"
                 className="h-20 w-auto object-contain opacity-80"
               />
 
@@ -563,7 +565,7 @@ const App: React.FC = () => {
                   className="group flex flex-col items-center gap-4 p-8 rounded-[40px] bg-white/5 border border-white/5 hover:border-[#FCBE26]/30 transition-all duration-700"
                 >
                   <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-[#FCBE26] shadow-[0_0_30px_rgba(252,190,38,0.4)] group-hover:scale-110 transition-transform duration-700">
-                    <img src="/assets/Gabriel-Guimaraes.webp" alt="Gabriel Guimarães" className="w-full h-full object-cover" />
+                    <img src="/assets/Gabriel-Guimaraes.webp" alt="Gabriel Guimarães - WhatsApp" loading="lazy" className="w-full h-full object-cover" />
                   </div>
                   <span className="text-2xl font-black uppercase tracking-tighter italic">Falar com o Gabriel</span>
                   <span className="text-[#FCBE26] text-sm font-black uppercase tracking-[0.2em] opacity-60 group-hover:opacity-100 transition-opacity underline decoration-2 underline-offset-8">Consultoria Gratuita via WhatsApp</span>
