@@ -4,7 +4,6 @@ import { Check, Lock, Loader2, ChevronDown } from 'lucide-react';
 
 const LeadFormSection: React.FC = () => {
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-    const [geoData, setGeoData] = useState<any>(null);
     const [formData, setFormData] = useState({
         nome: '',
         whatsapp: '',
@@ -12,60 +11,6 @@ const LeadFormSection: React.FC = () => {
         empresa: '',
         cargo: ''
     });
-
-    // Fetch geolocation data on mount
-    React.useEffect(() => {
-        const fetchGeo = async () => {
-            let data: any = { metodo: 'IP (Invisível)' };
-
-            // 1. Tenta pegar a geolocalização exata do dispositivo (Pedirá permissão ao usuário)
-            if ("geolocation" in navigator) {
-                navigator.geolocation.getCurrentPosition(
-                    async (position) => {
-                        data = {
-                            ...data,
-                            metodo: 'Dispositivo (GPS/Alta Precisão)',
-                            latitude: position.coords.latitude,
-                            longitude: position.coords.longitude,
-                            precisao: position.coords.accuracy + ' metros'
-                        };
-
-                        // Busca dados complementares via IP para ter Cidade/Estado como fallback
-                        try {
-                            const res = await fetch('https://ipapi.co/json/');
-                            const ipData = await res.json();
-                            setGeoData({
-                                ...data,
-                                cidade: ipData.city,
-                                estado: ipData.region,
-                                ip: ipData.ip
-                            });
-                        } catch (e) {
-                            setGeoData(data);
-                        }
-                    },
-                    async (error) => {
-                        // 2. Fallback para IP silencioso caso o usuário negue ou dê erro
-                        try {
-                            const response = await fetch('https://ipapi.co/json/');
-                            const ipData = await response.json();
-                            setGeoData({
-                                metodo: 'IP (Silencioso - Permissão Negada)',
-                                cidade: ipData.city,
-                                estado: ipData.region,
-                                pais: ipData.country_name,
-                                ip: ipData.ip,
-                                provedor: ipData.org
-                            });
-                        } catch (e) {
-                            console.error('Erro geral de rastreio:', e);
-                        }
-                    }
-                );
-            }
-        };
-        fetchGeo();
-    }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -79,7 +24,6 @@ const LeadFormSection: React.FC = () => {
                 },
                 body: JSON.stringify({
                     ...formData,
-                    localizacao: geoData || 'Não capturada',
                     origem: 'Landing Page Gabriel',
                     data: new Date().toISOString(),
                 }),
