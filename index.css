@@ -32,16 +32,19 @@ body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    cursor: none;
 }
 
-a,
-button,
-[role="button"],
-input,
-textarea,
-select {
-    cursor: none;
+@media (pointer: fine) {
+
+    body,
+    a,
+    button,
+    [role="button"],
+    input,
+    textarea,
+    select {
+        cursor: none;
+    }
 }
 
 /* Glassmorphism */

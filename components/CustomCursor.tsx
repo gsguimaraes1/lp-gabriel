@@ -2,11 +2,19 @@ import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 
 const CustomCursor: React.FC = () => {
+  const [isMobile, setIsMobile] = React.useState(false);
   const cursorRef = useRef<HTMLDivElement>(null);
   const followerRef = useRef<HTMLDivElement>(null);
   const labelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Check if device is touch or has a fine pointer (mouse)
+    const isFinePointer = window.matchMedia('(pointer: fine)').matches;
+    if (!isFinePointer) {
+      setIsMobile(true);
+      return;
+    }
+
     const cursor = cursorRef.current;
     const follower = followerRef.current;
     const label = labelRef.current;
@@ -89,6 +97,8 @@ const CustomCursor: React.FC = () => {
       document.removeEventListener('mouseout', onMouseLeave);
     };
   }, []);
+
+  if (isMobile) return null;
 
   return (
     <>
