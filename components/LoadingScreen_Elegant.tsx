@@ -47,7 +47,7 @@ const LoadingScreen_Elegant: React.FC<LoadingScreenProps> = ({ onComplete }) => 
                         transition={{ duration: 1.2, ease: "circOut" }}
                         className="flex flex-col items-center"
                     >
-                        <img src="/assets/logo-arkad.png" alt="Arkad" className="h-20 w-auto opacity-90 brightness-200" />
+                        <img src="/assets/logo-arkad.webp" alt="Arkad" className="h-20 w-auto opacity-90 brightness-200" />
                         <motion.div
                             className="mt-6 text-[#FCBE26] text-[10px] uppercase font-black tracking-[0.6em] whitespace-nowrap"
                             animate={{ opacity: [0.4, 1, 0.4] }}

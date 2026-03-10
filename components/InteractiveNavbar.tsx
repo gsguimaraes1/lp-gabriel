@@ -38,13 +38,13 @@ const InteractiveNavbar: React.FC = () => {
     }, [activeIndex]);
 
     return (
-        <nav className="fixed top-0 left-0 w-full z-[100] px-4 md:px-8 py-6 pointer-events-none">
+        <nav className="fixed top-0 left-0 w-full z-[100] px-4 md:px-8 py-6 pointer-events-none" aria-label="Navegação Principal">
             <div className="max-w-7xl mx-auto flex justify-between items-center bg-[#000000]/60 backdrop-blur-xl border border-white/10 px-8 py-4 rounded-[32px] pointer-events-auto shadow-[0_20px_50px_rgba(0,0,0,0.3)]">
                 <motion.div
                     whileHover={{ scale: 1.05 }}
                     className="flex items-center gap-4"
                 >
-                    <img src="/assets/logo-arkad.png" alt="Arkad" className="h-10 md:h-12 w-auto object-contain" />
+                    <img src="/assets/logo-arkad.webp" alt="Arkad Logo" className="h-10 md:h-12 w-auto object-contain" />
                     <div className="hidden lg:flex items-center gap-2 px-3 py-1 bg-[#FCBE26]/10 border border-[#FCBE26]/20 rounded-full">
                         <div className="w-1.5 h-1.5 rounded-full bg-[#FCBE26] animate-pulse" />
                         <span className="text-[8px] font-black uppercase tracking-widest text-[#FCBE26]">System Live</span>
@@ -61,6 +61,7 @@ const InteractiveNavbar: React.FC = () => {
                             opacity: pillStyle.opacity
                         }}
                         transition={{ type: 'spring', stiffness: 350, damping: 30 }}
+                        aria-hidden="true"
                     />
 
                     {NAV_ITEMS.map((item, idx) => {
@@ -69,6 +70,7 @@ const InteractiveNavbar: React.FC = () => {
                             <a
                                 key={idx}
                                 href={item.href}
+                                aria-current={activeIndex === idx ? 'page' : undefined}
                                 className={`nav-item relative z-10 px-6 py-2 text-xs font-black tracking-widest uppercase transition-colors duration-300 rounded-full 
                                     ${isPilled ? 'text-black' : 'text-slate-400 hover:text-white'}`}
                                 onMouseEnter={() => {
@@ -99,6 +101,7 @@ const InteractiveNavbar: React.FC = () => {
                                 if (el) el.scrollIntoView({ behavior: 'smooth' });
                             }}
                             className="px-6 py-2.5 text-[10px] rounded-full"
+                            aria-label="Ir para contatos"
                         >
                             Contatos
                         </CTAButton>
@@ -106,7 +109,7 @@ const InteractiveNavbar: React.FC = () => {
                 </div>
 
                 {/* Mobile Menu Icon */}
-                <div className="md:hidden text-[#FCBE26]">
+                <div className="md:hidden text-[#FCBE26]" aria-hidden="true">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M4 12h16M4 6h16M4 18h16" /></svg>
                 </div>
             </div>

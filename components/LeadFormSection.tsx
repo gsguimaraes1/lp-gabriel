@@ -4,13 +4,29 @@ import { Check, Lock, Loader2, ChevronDown } from 'lucide-react';
 
 const LeadFormSection: React.FC = () => {
     const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+    const [cities, setCities] = useState<{ id: number, nome: string }[]>([]);
     const [formData, setFormData] = useState({
         nome: '',
         whatsapp: '',
         email: '',
         empresa: '',
+        cidade: '',
         cargo: ''
     });
+
+    // Fetch cities from IBGE on mount
+    React.useEffect(() => {
+        const fetchCities = async () => {
+            try {
+                const response = await fetch('https://servicodados.ibge.gov.br/api/v1/localidades/municipios?orderBy=nome');
+                const data = await response.json();
+                setCities(data);
+            } catch (error) {
+                console.error('Erro ao buscar cidades:', error);
+            }
+        };
+        fetchCities();
+    }, []);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -31,7 +47,7 @@ const LeadFormSection: React.FC = () => {
 
             if (response.ok) {
                 setStatus('success');
-                setFormData({ nome: '', whatsapp: '', email: '', empresa: '', cargo: '' });
+                setFormData({ nome: '', whatsapp: '', email: '', empresa: '', cidade: '', cargo: '' });
             } else {
                 setStatus('error');
             }
@@ -135,7 +151,6 @@ const LeadFormSection: React.FC = () => {
                                     <form className="space-y-6" onSubmit={handleSubmit}>
                                         {[
                                             { name: 'nome', type: 'text', placeholder: 'Nome completo' },
-                                            { name: 'whatsapp', type: 'tel', placeholder: 'WhatsApp para contato' },
                                             { name: 'email', type: 'email', placeholder: 'E-mail corporativo' },
                                             { name: 'empresa', type: 'text', placeholder: 'Nome da sua empresa' },
                                         ].map((field) => (
@@ -152,6 +167,43 @@ const LeadFormSection: React.FC = () => {
                                                 <div className="absolute inset-x-6 bottom-0 h-px bg-gradient-to-r from-transparent via-[#FCBE26]/0 to-transparent group-focus-within/field:via-[#FCBE26]/50 transition-all duration-700" />
                                             </div>
                                         ))}
+
+                                        {/* WHATSAPP WITH BRAZIL FLAG AND DDI */}
+                                        <div className="relative group/field">
+                                            <div className="absolute left-6 top-1/2 -translate-y-1/2 flex items-center gap-3 pr-4 border-r border-white/10 z-10 pointer-events-none">
+                                                <span className="text-xl">🇧🇷</span>
+                                                <span className="text-white font-bold opacity-60">+55</span>
+                                            </div>
+                                            <input
+                                                type="tel"
+                                                name="whatsapp"
+                                                required
+                                                value={formData.whatsapp}
+                                                onChange={handleChange}
+                                                placeholder="(00) 00000-0000"
+                                                className="w-full bg-white/5 border border-white/10 rounded-2xl pl-24 pr-6 py-5 focus:outline-none focus:border-[#FCBE26]/50 focus:bg-white/10 transition-all text-white placeholder:text-slate-500 font-medium"
+                                            />
+                                            <div className="absolute inset-x-6 bottom-0 h-px bg-gradient-to-r from-transparent via-[#FCBE26]/0 to-transparent group-focus-within/field:via-[#FCBE26]/50 transition-all duration-700" />
+                                        </div>
+
+                                        {/* CITY SELECT FROM IBGE */}
+                                        <div className="relative group/field">
+                                            <select
+                                                name="cidade"
+                                                required
+                                                value={formData.cidade}
+                                                onChange={(e) => setFormData(prev => ({ ...prev, cidade: e.target.value }))}
+                                                className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-5 focus:outline-none focus:border-[#FCBE26]/50 focus:bg-white/10 transition-all text-white appearance-none cursor-pointer pr-12 font-medium"
+                                            >
+                                                <option value="" disabled className="bg-[#050505]">Sua Cidade</option>
+                                                {cities.map(city => (
+                                                    <option key={city.id} value={city.nome} className="bg-[#050505]">{city.nome}</option>
+                                                ))}
+                                            </select>
+                                            <div className="absolute right-6 top-1/2 -translate-y-1/2 flex items-center gap-2 pointer-events-none text-slate-500 group-focus-within/field:text-[#FCBE26]">
+                                                {cities.length === 0 ? <Loader2 className="animate-spin" size={18} /> : <ChevronDown size={20} />}
+                                            </div>
+                                        </div>
 
                                         <div className="relative group/field">
                                             <select

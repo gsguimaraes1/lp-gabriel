@@ -2,14 +2,14 @@ import React, { useRef, useEffect, useState } from 'react';
 import { motion, useMotionValue, useAnimationFrame } from 'framer-motion';
 
 const techLogos = [
-  { src: "/assets/google.png", alt: "Google Ads" },
-  { src: "/assets/meta.png", alt: "Meta Ads" },
-  { src: "/assets/wordpress.png", alt: "WordPress" },
-  { src: "/assets/gtm.png", alt: "GTM" },
-  { src: "/assets/analytics.png", alt: "GA4" },
-  { src: "/assets/n8n.png", alt: "n8n" },
-  { src: "/assets/powerbi.png", alt: "Power BI" },
-  { src: "/assets/react.png", alt: "React" },
+  { src: "/assets/google.webp", alt: "Google Ads" },
+  { src: "/assets/meta.webp", alt: "Meta Ads" },
+  { src: "/assets/wordpress.webp", alt: "WordPress" },
+  { src: "/assets/gtm.webp", alt: "GTM" },
+  { src: "/assets/analytics.webp", alt: "GA4" },
+  { src: "/assets/n8n.webp", alt: "n8n" },
+  { src: "/assets/powerbi.webp", alt: "Power BI" },
+  { src: "/assets/react.webp", alt: "React" },
 ];
 
 const COLLISION_RADIUS = 40;

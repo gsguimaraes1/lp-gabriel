@@ -31,32 +31,32 @@ export const SERVICES = [
 export const TECH_STACK_LOGOS = [
   {
     name: "Google Ads",
-    icon: <img src="/assets/google.png" className="h-10 w-10 object-contain" alt="Google Ads" />,
+    icon: <img src="/assets/google.webp" className="h-10 w-10 object-contain" alt="Google Ads" />,
     description: "Captura de intenção de compra imediata com foco em fundo de funil."
   },
   {
     name: "Meta Ads",
-    icon: <img src="/assets/meta.png" className="h-10 w-10 object-contain" alt="Meta Ads" />,
+    icon: <img src="/assets/meta.webp" className="h-10 w-10 object-contain" alt="Meta Ads" />,
     description: "Geração de demanda e autoridade através de segmentação avançada."
   },
   {
     name: "GA4",
-    icon: <img src="/assets/analytics.png" className="h-10 w-10 object-contain" alt="GA4" />,
+    icon: <img src="/assets/analytics.webp" className="h-10 w-10 object-contain" alt="GA4" />,
     description: "Mensuração precisa da jornada para decisões baseadas em ROI."
   },
   {
     name: "n8n",
-    icon: <img src="/assets/n8n.png" className="h-10 w-10 object-contain rounded-sm" alt="n8n" />,
+    icon: <img src="/assets/n8n.webp" className="h-10 w-10 object-contain rounded-sm" alt="n8n" />,
     description: "Automação de processos e integração profunda entre sistemas."
   },
   {
     name: "Power BI",
-    icon: <img src="/assets/powerbi.png" className="h-10 w-10 object-contain" alt="Power BI" />,
+    icon: <img src="/assets/powerbi.webp" className="h-10 w-10 object-contain" alt="Power BI" />,
     description: "Visualização de KPIs para clareza total sobre o crescimento."
   },
   {
     name: "GTM",
-    icon: <img src="/assets/gtm.png" className="h-10 w-10 object-contain" alt="GTM" />,
+    icon: <img src="/assets/gtm.webp" className="h-10 w-10 object-contain" alt="GTM" />,
     description: "Gestão centralizada de scripts e rastreamento avançado sem depender de TI."
   },
 ];

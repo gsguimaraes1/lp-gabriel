@@ -21,25 +21,18 @@ const CustomCursor: React.FC = () => {
 
     if (!cursor || !follower || !label) return;
 
-    // Move cursor and follower
+    // Use quickTo for better performance (avoids creating new tweens on every move)
+    const xDotTo = gsap.quickTo(cursor, "x", { duration: 0.1, ease: "power2.out" });
+    const yDotTo = gsap.quickTo(cursor, "y", { duration: 0.1, ease: "power2.out" });
+    const xFollowTo = gsap.quickTo(follower, "x", { duration: 0.5, ease: "power3.out" });
+    const yFollowTo = gsap.quickTo(follower, "y", { duration: 0.5, ease: "power3.out" });
+
     const onMouseMove = (e: MouseEvent) => {
       const { clientX, clientY } = e;
-
-      // Fast cursor dot
-      gsap.to(cursor, {
-        x: clientX,
-        y: clientY,
-        duration: 0.1,
-        ease: 'power2.out'
-      });
-
-      // Slower following ring
-      gsap.to(follower, {
-        x: clientX,
-        y: clientY,
-        duration: 0.5,
-        ease: 'power3.out'
-      });
+      xDotTo(clientX);
+      yDotTo(clientY);
+      xFollowTo(clientX);
+      yFollowTo(clientY);
     };
 
     // Hover states

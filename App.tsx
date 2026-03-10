@@ -181,15 +181,15 @@ const App: React.FC = () => {
                 <div className="flex flex-col gap-1">
                   <span className="text-[10px] uppercase font-black tracking-widest">Growth Engine</span>
                   <div className="flex gap-6 items-center opacity-60">
-                    <img src="/assets/google.png" alt="Google" className="h-4 w-auto object-contain" />
-                    <img src="/assets/meta.png" alt="Meta" className="h-4 w-auto object-contain" />
-                    <img src="/assets/analytics.png" alt="GA4" className="h-4 w-auto object-contain" />
+                    <img src="/assets/google.webp" alt="Google" className="h-4 w-auto object-contain" />
+                    <img src="/assets/meta.webp" alt="Meta" className="h-4 w-auto object-contain" />
+                    <img src="/assets/analytics.webp" alt="GA4" className="h-4 w-auto object-contain" />
                   </div>
                 </div>
                 <div className="w-px h-8 bg-white/10 hidden sm:block" />
                 <div className="flex flex-col gap-1">
                   <span className="text-[10px] uppercase font-black tracking-widest">Automation Logic</span>
-                  <img src="/assets/n8n.png" alt="n8n" className="h-4 w-auto object-contain" />
+                  <img src="/assets/n8n.webp" alt="n8n" className="h-4 w-auto object-contain" />
                 </div>
               </motion.div>
             </div>
@@ -287,9 +287,9 @@ const App: React.FC = () => {
                   <div className="w-20 h-20 rounded-[30px] bg-black flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform duration-700">
                     <CheckCircle2 className="text-[#FCBE26]" size={40} />
                   </div>
-                  <h3 className="text-4xl font-black tracking-tighter text-slate-900 uppercase italic">
+                  <h2 className="text-4xl font-black tracking-tighter text-slate-900 uppercase italic">
                     Protocolo de <span className="text-black">ESCALA</span>
-                  </h3>
+                  </h2>
                 </div>
 
                 <ul className="space-y-8 relative z-10">
@@ -328,9 +328,9 @@ const App: React.FC = () => {
                   <div className="w-16 h-16 rounded-[24px] bg-red-500/10 border border-red-500/20 flex items-center justify-center shadow-[0_0_20px_rgba(239,68,68,0.1)]">
                     <XCircle className="text-red-500" size={32} />
                   </div>
-                  <h3 className="text-3xl font-black tracking-tighter text-slate-800 uppercase italic">
+                  <h2 className="text-3xl font-black tracking-tighter text-slate-800 uppercase italic">
                     NÃO <span className="text-slate-400">ATENDEMOS</span>
-                  </h3>
+                  </h2>
                 </div>
 
                 <ul className="space-y-10 mb-12">
@@ -464,7 +464,7 @@ const App: React.FC = () => {
                   <div className="absolute -inset-4 bg-gradient-to-r from-[#FCBE26] to-[#FFA000] rounded-[40px] blur-2xl opacity-20 group-hover:opacity-30 transition-opacity duration-700" />
                   <div className="w-full aspect-[4/5] bg-slate-800 rounded-[35px] overflow-hidden border border-white/10 relative shadow-2xl group">
                     <img
-                      src="/assets/Gabriel-Guimaraes.png"
+                      src="/assets/Gabriel-Guimaraes.webp"
                       alt="Gabriel Guimarães"
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                       data-cursor-text="GABRIEL"
@@ -518,8 +518,8 @@ const App: React.FC = () => {
           <div className="py-16 bg-[#000000] border-t border-white/5 flex flex-col items-center">
             <p className="text-slate-600 text-[9px] uppercase font-black tracking-[0.5em] mb-10 opacity-40">Marcas que aceleram conosco</p>
             <div className="flex flex-wrap justify-center items-center gap-16 md:gap-24 opacity-30 hover:opacity-80 transition-all duration-700">
-              <img src="/assets/logo branco_krenke.png" alt="Krenke" className="h-7 w-auto object-contain" />
-              <img src="/assets/logo-kinderplay.png" alt="Kinderplay" className="h-9 w-auto object-contain brightness-0 invert" />
+              <img src="/assets/logo branco_krenke.webp" alt="Krenke" className="h-7 w-auto object-contain" />
+              <img src="/assets/logo-kinderplay.webp" alt="Kinderplay" className="h-9 w-auto object-contain brightness-0 invert" />
             </div>
           </div>
 
@@ -532,7 +532,7 @@ const App: React.FC = () => {
             <div className="max-w-7xl mx-auto flex flex-col items-center gap-16 relative z-10">
               <motion.img
                 whileHover={{ scale: 1.1, rotate: [0, -2, 2, 0] }}
-                src="/assets/logo-arkad.png"
+                src="/assets/logo-arkad.webp"
                 alt="Arkad"
                 className="h-20 w-auto object-contain opacity-80"
               />
@@ -556,11 +556,14 @@ const App: React.FC = () => {
 
               <div className="flex flex-col gap-8 w-full max-w-2xl">
                 <a
-                  href="#"
+                  href="https://wa.me/55"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Falar com Gabriel no WhatsApp"
                   className="group flex flex-col items-center gap-4 p-8 rounded-[40px] bg-white/5 border border-white/5 hover:border-[#FCBE26]/30 transition-all duration-700"
                 >
                   <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-[#FCBE26] shadow-[0_0_30px_rgba(252,190,38,0.4)] group-hover:scale-110 transition-transform duration-700">
-                    <img src="/assets/Gabriel-Guimaraes.png" alt="Gabriel" className="w-full h-full object-cover" />
+                    <img src="/assets/Gabriel-Guimaraes.webp" alt="Gabriel Guimarães" className="w-full h-full object-cover" />
                   </div>
                   <span className="text-2xl font-black uppercase tracking-tighter italic">Falar com o Gabriel</span>
                   <span className="text-[#FCBE26] text-sm font-black uppercase tracking-[0.2em] opacity-60 group-hover:opacity-100 transition-opacity underline decoration-2 underline-offset-8">Consultoria Gratuita via WhatsApp</span>
