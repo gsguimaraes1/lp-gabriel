@@ -5,7 +5,7 @@ import CTAButton from './CTAButton';
 const NAV_ITEMS = [
     { label: 'Home', href: '#hero' },
     { label: 'Serviços', href: '#services' },
-    { label: 'Cases', href: '#leads' },
+    { label: 'Cases', href: '#cases' },
     { label: 'Sobre', href: '#about' }
 ];
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import {
   CheckCircle2,
   XCircle,
@@ -25,7 +25,6 @@ import OrbitingTechIcons from './components/OrbitingTechIcons';
 import TechBackground from './components/TechBackground';
 import Floating3DObjects from './components/Floating3DObjects';
 import CustomCursor from './components/CustomCursor';
-import LoadingScreen from './components/LoadingScreen';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -33,7 +32,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 const App: React.FC = () => {
   const { scrollYProgress } = useScroll();
-  const [isLoading, setIsLoading] = React.useState(true);
 
   // Hero Parallax Effects - vanishing as we scroll down
   const heroScale = useTransform(scrollYProgress, [0, 0.15], [1, 0.85]);
@@ -94,20 +92,10 @@ const App: React.FC = () => {
     });
   }, []);
 
-  React.useEffect(() => {
-    if (isLoading) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = 'unset';
-    }
-  }, [isLoading]);
 
   return (
     <div className="min-h-screen text-white font-sans selection:bg-[#FCBE26] selection:text-[#000000] relative bg-[#000000] overflow-x-hidden">
       <CustomCursor />
-      <AnimatePresence mode="wait">
-        {isLoading && <LoadingScreen onComplete={() => setIsLoading(false)} />}
-      </AnimatePresence>
       <Floating3DObjects />
       {/* AMBIENT BACKGROUND BEAMS */}
       <div className="ambient-beam beam-1" />
@@ -225,7 +213,6 @@ const App: React.FC = () => {
                 <span>• CPA OTIMIZADO</span>
                 <span>• SCALE MODE: ON</span>
                 <span>• DATA-DRIVEN STRATEGY</span>
-                <span>• ARKAD PERFORMANCE</span>
               </div>
             ))}
           </motion.div>
@@ -451,78 +438,199 @@ const App: React.FC = () => {
 
           {/* SEÇÃO 6: SOBRE - VOLTA PARA O ROXO PROFUNDO */}
           <section id="about" className="py-40 px-4 md:px-8 bg-[#000000] relative overflow-hidden scroll-mt-24">
-            <div className="absolute bottom-0 right-0 w-[800px] h-[800px] bg-[#FCBE26]/5 blur-[200px] -z-0 rounded-full" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(252,190,38,0.03),transparent_70%)]" />
 
-            <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-24 relative z-10">
-              <motion.div
-                initial={{ opacity: 0, x: -50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                className="lg:w-2/5"
-              >
-                <div className="relative group">
-                  <div className="absolute -inset-4 bg-gradient-to-r from-[#FCBE26] to-[#FFA000] rounded-[40px] blur-2xl opacity-20 group-hover:opacity-30 transition-opacity duration-700" />
-                  <div className="w-full aspect-[4/5] bg-slate-800 rounded-[35px] overflow-hidden border border-white/10 relative shadow-2xl group">
-                    <img
-                      src="/assets/Gabriel-Guimaraes.webp"
-                      alt="Gabriel Guimarães - Fundador da Arkad"
-                      loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      data-cursor-text="GABRIEL"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-transparent to-transparent opacity-80" />
-                    <div className="absolute inset-0 flex flex-col items-center justify-end p-12 text-center">
-                      <h4 className="text-2xl font-black uppercase tracking-tighter italic">Gabriel Guimarães</h4>
-                      <p className="text-sm font-black text-[#FCBE26] tracking-[0.3em] uppercase mt-2">Fundador & Estrategista</p>
+            <div className="max-w-7xl mx-auto relative z-10">
+              <div className="text-center mb-24">
+                <motion.h2
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="text-5xl md:text-7xl font-black tracking-tighter uppercase italic text-white mb-6"
+                >
+                  Mais que gestores, <br />
+                  <span className="text-[#FCBE26]">parceiros de crescimento.</span>
+                </motion.h2>
+                <div className="w-24 h-1 bg-[#FCBE26] mx-auto rounded-full" />
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-12 lg:gap-20">
+                {/* GABRIEL GUIMARÃES */}
+                <motion.div
+                  initial={{ opacity: 0, x: -30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  className="group relative p-10 rounded-[50px] bg-white/[0.02] border border-white/5 hover:border-[#FCBE26]/30 transition-all duration-700 overflow-hidden"
+                >
+                  <div className="absolute -top-24 -left-24 w-64 h-64 bg-[#FCBE26]/5 blur-[100px] rounded-full group-hover:bg-[#FCBE26]/10 transition-colors" />
+
+                  <div className="relative z-10">
+                    <div className="w-32 h-32 rounded-[30px] overflow-hidden border-2 border-[#FCBE26] mb-10 shadow-[0_0_30px_rgba(252,190,38,0.2)]">
+                      <img src="/assets/Gabriel-Guimaraes.webp" alt="Gabriel Guimarães" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+                    </div>
+
+                    <h3 className="text-3xl font-black text-white uppercase italic tracking-tighter mb-2">Gabriel Guimarães</h3>
+                    <p className="text-[#FCBE26] text-xs font-black uppercase tracking-[0.3em] mb-8">Analista de Dados & Gestor de Automações</p>
+
+                    <div className="space-y-6 text-slate-400 text-lg leading-relaxed font-medium">
+                      <p>
+                        Especialista em transformar dados crus em <span className="text-white">inteligência de escala</span>. Arquiteta ecossistemas de automação e BI que eliminam o erro humano, garantindo que cada decisão seja baseada em fatos.
+                      </p>
+                      <p>
+                        Foco total na infraestrutura técnica necessária para que operações sólidas consigam escalar com <span className="text-white italic">previsibilidade e controle total.</span>
+                      </p>
+                    </div>
+
+                    <div className="mt-12 pt-8 border-t border-white/5 flex gap-4">
+                      <div className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-slate-500">Data Engineer</div>
+                      <div className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-slate-500">IA Specialist</div>
                     </div>
                   </div>
-                </div>
-              </motion.div>
+                </motion.div>
 
+                {/* LEO KOERICH */}
+                <motion.div
+                  initial={{ opacity: 0, x: 30 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  className="group relative p-10 rounded-[50px] bg-white/[0.02] border border-white/5 hover:border-[#FCBE26]/30 transition-all duration-700 overflow-hidden"
+                >
+                  <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#FCBE26]/5 blur-[100px] rounded-full group-hover:bg-[#FCBE26]/10 transition-colors" />
+
+                  <div className="relative z-10">
+                    <div className="w-32 h-32 rounded-[30px] overflow-hidden border-2 border-[#FCBE26] mb-10 shadow-[0_0_30px_rgba(252,190,38,0.2)]">
+                      <img src="/assets/leo.jpeg" alt="Leo Koerich" className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
+                    </div>
+
+                    <h3 className="text-3xl font-black text-white uppercase italic tracking-tighter mb-2">Leo Koerich</h3>
+                    <p className="text-[#FCBE26] text-xs font-black uppercase tracking-[0.3em] mb-8">Estrategista de Tráfego</p>
+
+                    <div className="space-y-6 text-slate-400 text-lg leading-relaxed font-medium">
+                      <p>
+                        Membro da <span className="text-[#FCBE26] font-black">Comunidade Sobral</span> e especialista em operações de alta performance. Domina as táticas mais avançadas de Google e Meta Ads para capturar as melhores oportunidades.
+                      </p>
+                      <p>
+                        Focado no refinamento tático implacável e otimização de <span className="text-white">ROI real</span>, unindo criatividade e análise técnica para dominar o leilão e reduzir o CAC.
+                      </p>
+                    </div>
+
+                    <div className="mt-12 pt-8 border-t border-white/5 flex gap-4">
+                      <div className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-[#FCBE26]">Sobral Certified</div>
+                      <div className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-[10px] font-black uppercase tracking-widest text-slate-500">Ads Specialist</div>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* STATS ROW */}
               <motion.div
-                initial={{ opacity: 0, x: 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="lg:w-3/5"
+                className="mt-24 grid grid-cols-2 md:grid-cols-4 gap-8 py-12 border-y border-white/5 bg-white/[0.01]"
               >
-                <h2 className="text-5xl md:text-6xl font-black mb-10 tracking-tighter uppercase italic leading-tight">
-                  Mais que um gestor, <br />
-                  <span className="text-[#FCBE26]">um parceiro estratégico.</span>
-                </h2>
-                <div className="space-y-8 text-slate-300 text-xl md:text-2xl leading-relaxed font-medium">
-                  <p>
-                    Minha missão é simples: usar <span className="text-white">dados e automação</span> para garantir que empresas sólidas continuem crescendo com previsibilidade.
-                  </p>
-                  <p>
-                    Em um mercado saturado de amadorismo, eu entrego <span className="text-[#FCBE26]">ciência de marketing</span>. Focamos em CAC, LTV e ROAS real, fugindo das métricas de vaidade.
-                  </p>
-                  <blockquote className="border-l-8 border-[#FCBE26] pl-10 italic text-slate-400 py-6 text-2xl md:text-3xl font-bold bg-white/5 rounded-r-3xl pr-8">
-                    "O tráfego pago é a engrenagem de faturamento que precisa ser lubrificada com dados."
-                  </blockquote>
-                </div>
-
-                <div className="mt-16 grid grid-cols-2 gap-12">
-                  <div className="text-left">
-                    <p className="text-5xl font-black text-[#FCBE26] tracking-tighter italic">100%</p>
-                    <p className="text-xs text-slate-500 uppercase font-black tracking-[0.3em] mt-2">Foco em Performance</p>
+                {[
+                  { val: "100%", label: "Performance" },
+                  { val: "B2B", label: "Specialists" },
+                  { val: "+20M", label: "Investidos" },
+                  { val: "ROI", label: "Data Driven" }
+                ].map((stat, i) => (
+                  <div key={i} className="text-center group">
+                    <p className="text-4xl font-black text-white mb-2 group-hover:text-[#FCBE26] transition-colors">{stat.val}</p>
+                    <p className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-600 group-hover:text-slate-400">{stat.label}</p>
                   </div>
-                  <div className="text-left">
-                    <p className="text-5xl font-black text-[#FCBE26] tracking-tighter italic">B2B</p>
-                    <p className="text-xs text-slate-500 uppercase font-black tracking-[0.3em] mt-2">Especialista Real</p>
-                  </div>
-                </div>
+                ))}
               </motion.div>
             </div>
           </section>
 
-          {/* SEÇÃO DE PARCEIROS (DISCRETA) */}
-          <div className="py-16 bg-[#000000] border-t border-white/5 flex flex-col items-center">
-            <p className="text-slate-600 text-[9px] uppercase font-black tracking-[0.5em] mb-10 opacity-40">Marcas que aceleram conosco</p>
-            <div className="flex flex-wrap justify-center items-center gap-16 md:gap-24 opacity-30 hover:opacity-80 transition-all duration-700">
-              <img src="/assets/logo branco_krenke.webp" alt="Logo Krenke" loading="lazy" className="h-7 w-auto object-contain" />
-              <img src="/assets/logo-kinderplay.webp" alt="Logo Kinderplay" loading="lazy" className="h-9 w-auto object-contain brightness-0 invert" />
+          {/* SEÇÃO DE CASES E PARCEIROS - PREMIUM */}
+          <section id="cases" className="py-40 px-4 md:px-8 bg-[#050505] relative overflow-hidden border-t border-white/5 scroll-mt-24">
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#FCBE26]/5 blur-[150px] rounded-full pointer-events-none" />
+
+            <div className="max-w-7xl mx-auto relative z-10">
+              <div className="text-left mb-24">
+                <motion.p
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  className="text-[#FCBE26] text-xs font-black uppercase tracking-[0.4em] mb-4"
+                >
+                  Sucesso Validado
+                </motion.p>
+                <motion.h2
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 }}
+                  className="text-4xl md:text-6xl font-black text-white uppercase italic tracking-tighter"
+                >
+                  Operações que <span className="text-transparent bg-clip-text bg-gradient-to-r from-white to-white/40">dominam o mercado</span>
+                </motion.h2>
+              </div>
+
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                {/* KRENKE */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="group relative p-8 rounded-[40px] bg-white/[0.02] border border-white/5 hover:border-[#FCBE26]/20 transition-all duration-500 flex flex-col h-full"
+                >
+                  <div className="mb-12 h-12 flex items-center">
+                    <img src="/assets/logo branco_krenke.webp" alt="Logo Krenke" className="h-full w-auto object-contain opacity-40 group-hover:opacity-100 transition-all duration-700" />
+                  </div>
+                  <h3 className="text-xl font-black text-white uppercase italic mb-4 tracking-tighter">Krenke</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed mb-8 flex-grow">
+                    A autoridade máxima em infraestrutura de lazer. Definindo o padrão de excelência industrial desde 1987, a Krenke foca na <span className="text-white font-bold">escala vertical para operações B2B de alto volume</span>, transformando projetos complexos em impacto nacional.
+                  </p>
+                  <div className="pt-6 border-t border-white/5">
+                    <span className="text-[10px] font-black text-[#FCBE26] uppercase tracking-[0.2em]">INDÚSTRIA & B2B</span>
+                  </div>
+                </motion.div>
+
+                {/* KINDERPLAY */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 }}
+                  className="group relative p-8 rounded-[40px] bg-white/[0.02] border border-white/5 hover:border-[#FCBE26]/20 transition-all duration-500 flex flex-col h-full"
+                >
+                  <div className="mb-12 h-12 flex items-center">
+                    <img src="/assets/logo-kinderplay.webp" alt="Logo Kinderplay" className="h-full w-auto object-contain opacity-40 group-hover:opacity-100 brightness-0 invert transition-all duration-700" />
+                  </div>
+                  <h3 className="text-xl font-black text-white uppercase italic mb-4 tracking-tighter">Kinderplay</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed mb-8 flex-grow">
+                    Dominando o mercado digital de lazer há mais de 6 anos. Líder absoluta em parques de alta performance, a Kinderplay utiliza <span className="text-white font-bold">engenharia de tráfego de precisão</span> para manter a soberania e a escala no e-commerce nacional.
+                  </p>
+                  <div className="pt-6 border-t border-white/5">
+                    <span className="text-[10px] font-black text-[#FCBE26] uppercase tracking-[0.2em]">E-COMMERCE & LAZER</span>
+                  </div>
+                </motion.div>
+
+                {/* GUIA RECEPTIVO */}
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.2 }}
+                  className="group relative p-8 rounded-[40px] bg-white/[0.02] border border-white/5 hover:border-[#FCBE26]/20 transition-all duration-500 flex flex-col h-full"
+                >
+                  <div className="mb-12 h-12 flex items-center">
+                    <img src="/assets/guia_receptivo.png" alt="Logo Guia Receptivo" className="h-full w-auto object-contain opacity-40 group-hover:opacity-100 transition-all duration-700" />
+                  </div>
+                  <h3 className="text-xl font-black text-white uppercase italic mb-4 tracking-tighter">Guia Receptivo</h3>
+                  <p className="text-slate-400 text-sm leading-relaxed mb-8 flex-grow">
+                    Redefinindo o turismo de elite com foco em destinos argentinos. Escalamos a experiência de luxo através de <span className="text-white font-bold">automação logística e rastreamento em tempo real</span>, garantindo segurança e exclusividade da Patagônia a Buenos Aires.
+                  </p>
+                  <div className="pt-6 border-t border-white/5">
+                    <span className="text-[10px] font-black text-[#FCBE26] uppercase tracking-[0.2em]">TURISMO DE ELITE</span>
+                  </div>
+                </motion.div>
+              </div>
             </div>
-          </div>
+          </section>
 
           <LeadFormSection />
 
@@ -543,7 +651,7 @@ const App: React.FC = () => {
                 {[
                   { label: 'Home', id: 'hero' },
                   { label: 'Serviços', id: 'services' },
-                  { label: 'Cases', id: 'leads' },
+                  { label: 'Cases', id: 'cases' },
                   { label: 'Sobre', id: 'about' }
                 ].map((link) => (
                   <button
@@ -561,14 +669,19 @@ const App: React.FC = () => {
                   href="https://wa.me/55"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="Falar com Gabriel no WhatsApp"
+                  aria-label="Falar com nossos estrategistas no WhatsApp"
                   className="group flex flex-col items-center gap-4 p-8 rounded-[40px] bg-white/5 border border-white/5 hover:border-[#FCBE26]/30 transition-all duration-700"
                 >
-                  <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-[#FCBE26] shadow-[0_0_30px_rgba(252,190,38,0.4)] group-hover:scale-110 transition-transform duration-700">
-                    <img src="/assets/Gabriel-Guimaraes.webp" alt="Gabriel Guimarães - WhatsApp" loading="lazy" className="w-full h-full object-cover" />
+                  <div className="flex -space-x-4 mb-2">
+                    <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-[#FCBE26] shadow-[0_0_30px_rgba(252,190,38,0.4)] group-hover:scale-110 transition-transform duration-700 z-10">
+                      <img src="/assets/Gabriel-Guimaraes.webp" alt="Gabriel Guimarães" loading="lazy" className="w-full h-full object-cover" />
+                    </div>
+                    <div className="w-20 h-20 rounded-full overflow-hidden border-4 border-[#FCBE26] shadow-[0_0_30px_rgba(252,190,38,0.4)] group-hover:scale-110 transition-transform duration-700 z-0">
+                      <img src="/assets/leo.jpeg" alt="Leo Koerich" loading="lazy" className="w-full h-full object-cover" />
+                    </div>
                   </div>
-                  <span className="text-2xl font-black uppercase tracking-tighter italic">Falar com o Gabriel</span>
-                  <span className="text-[#FCBE26] text-sm font-black uppercase tracking-[0.2em] opacity-60 group-hover:opacity-100 transition-opacity underline decoration-2 underline-offset-8">Consultoria Gratuita via WhatsApp</span>
+                  <span className="text-2xl font-black uppercase tracking-tighter italic">Falar com os Estrategistas</span>
+                  <span className="text-[#FCBE26] text-sm font-black uppercase tracking-[0.2em] opacity-60 group-hover:opacity-100 transition-opacity underline decoration-2 underline-offset-8">Consultoria de Escala via WhatsApp</span>
                 </a>
 
                 <div className="flex flex-col gap-4 mt-8">
